@@ -60,6 +60,7 @@ public class TableViewController {
             Type listType = new TypeToken<List<Customer>>() {}.getType();
             List<Customer> customers = gson.fromJson(reader, listType);
 
+            //This should take care of question 7...
             customerList.setAll(customers);
             rowsInTableLabel.setText("Rows in table: " + customers.size());
 
