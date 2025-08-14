@@ -11,4 +11,18 @@ public class HelloController {
     protected void onHelloButtonClick() {
         welcomeText.setText("Welcome to JavaFX Application!");
     }
+
+
+
+    // Fetch from api
+    @FXML
+    public void onFetchDataClick() {
+        try {
+            Customer[] customers = APIService.fetchCustomers().toArray(new Customer[0]);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
 }
