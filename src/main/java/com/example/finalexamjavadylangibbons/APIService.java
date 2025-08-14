@@ -15,8 +15,6 @@ import java.lang.reflect.Type;
 
 public class APIService {
 
-//    public static Customer[] fetchCustomers(String s, Class<Customer[]> aClass) {
-//    }
 
     public static List<Customer> fetchCustomers() {
         Gson gson = new Gson();
@@ -28,7 +26,7 @@ public class APIService {
             customers = gson.fromJson(reader, itemListType);
 
         } catch (Exception e) {
-            e.printStackTrace(); // Handle the exception appropriately
+            e.printStackTrace();
         }
         return customers;
     }

@@ -2,25 +2,21 @@
 
 package com.example.finalexamjavadylangibbons;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.image.ImageView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import java.io.FileReader;
+import java.io.IOException;
+import java.lang.reflect.Type;
+import java.util.List;
 
 public class TableViewController {
-    @FXML
-    private Label saleLabel;
-
-    @FXML
-    private Label msrpLabel;
-
-    @FXML
-    private Label savingsLabel;
-
-    @FXML
-    private Label rowsInTableLabel;
 
     @FXML
     private TableView<Customer> tableView;
@@ -38,19 +34,37 @@ public class TableViewController {
     private TableColumn<Customer, String> phoneColumn;
 
     @FXML
-    private TableColumn<Customer, String> totalPurchaseColumn;
+    private TableColumn<Customer, Double> totalPurchaseColumn;
 
     @FXML
-    private ListView<Product> purchaseListView;
+    private Label rowsInTableLabel;
+
+    private ObservableList<Customer> customerList = FXCollections.observableArrayList();
 
     @FXML
-    private ImageView imageView;
+    public void initialize() {
+        // Bind columns to customer properties
+        idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+        firstNameColumn.setCellValueFactory(new PropertyValueFactory<>("firstName"));
+        lastNameColumn.setCellValueFactory(new PropertyValueFactory<>("lastName"));
+        phoneColumn.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
+        totalPurchaseColumn.setCellValueFactory(new PropertyValueFactory<>("totalPurchases"));
 
-
+        tableView.setItems(customerList);
+    }
 
     @FXML
-    private void loadAllCustomers()
-    {
-        System.out.println("called method loadAllCustomers");
+    public void loadAllCustomers() {
+        try (FileReader reader = new FileReader("customers.json")) {
+            Gson gson = new Gson();
+            Type listType = new TypeToken<List<Customer>>() {}.getType();
+            List<Customer> customers = gson.fromJson(reader, listType);
+
+            customerList.setAll(customers);
+            rowsInTableLabel.setText("Rows in table: " + customers.size());
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

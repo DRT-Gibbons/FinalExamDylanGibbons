@@ -5,15 +5,39 @@ package com.example.finalexamjavadylangibbons;
 import java.util.Arrays;
 
 public class Customer {
-    public int id;
-    public String firstName;
-    public String lastName;
-    public String phoneNumber;
-    public Integer[] purchases;
-    public double salePrice;
-    public double[] regularPrices;
-    public double[] salePrices;
+    private int id;
+    private String firstName;
+    private String lastName;
+    private String phoneNumber;
+    private double[] salePrices;
+    private double[] regularPrices;
 
+    //  getters for TableView
+    public int getId() {
+        return id;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    // Getter for total purchases, changed from what I initially had it
+    public double getTotalPurchases() {
+        if (salePrices == null) return 0.0;
+
+        return Arrays.stream(salePrices)
+                .sum();
+    }
+
+    // getter for savings
     public double getTotalSaved() {
         double totalSaved = 0.0;
 
@@ -25,17 +49,5 @@ public class Customer {
             totalSaved += (regularPrices[i] - salePrices[i]);
         }
         return totalSaved;
-    }
-
-    // Method to return total purchases as double using streams
-    public double getTotalPurchases() {
-        if (purchases == null) {
-            return 0.0;
-        }
-
-        // Convert array to stream avoid null exception and convert to double then sum
-        return Arrays.stream(purchases).filter(p -> p != null)
-                .mapToDouble(Integer::doubleValue)
-                .sum();
     }
 }
