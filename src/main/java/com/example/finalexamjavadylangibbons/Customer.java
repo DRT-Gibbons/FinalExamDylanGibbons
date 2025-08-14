@@ -9,7 +9,7 @@ public class Customer {
     private String firstName;
     private String lastName;
     private String phoneNumber;
-    private double[] salePrices;
+    double[] salePrices;
     private double[] regularPrices;
 
     //  getters for TableView

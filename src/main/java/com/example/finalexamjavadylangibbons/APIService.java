@@ -7,8 +7,6 @@ import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 
 import java.io.*;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.List;
 import java.lang.reflect.Type;
 
@@ -19,7 +17,7 @@ public class APIService {
     public static List<Customer> fetchCustomers() {
         Gson gson = new Gson();
         List<Customer> customers = null;
-        try (InputStream is = APIService.class.getResourceAsStream("/customers.json");
+        try (InputStream is = APIService.class.getResourceAsStream("/com/example/finalexamjavadylangibbons/customers.json");
              JsonReader reader = new JsonReader(new InputStreamReader(is))) {
 
             Type itemListType = new TypeToken<List<Customer>>() {}.getType();
