@@ -1,3 +1,5 @@
+//Name: Dylan Gibbons; Student Number: 200230810
+
 package com.example.finalexamjavadylangibbons;
 
 public class Product {
