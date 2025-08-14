@@ -76,7 +76,7 @@ public class TableViewController {
 
     @FXML
     public void loadAllCustomers() {
-        try (FileReader reader = new FileReader("com/example/finalexamjavadylangibbons/customers.json")) {
+        try (FileReader reader = new FileReader("/Users/drtg/Desktop/javafxproj/FinalExamJavaDylanGibbons/src/main/resources/com/example/finalexamjavadylangibbons/customers.json");) {
             Gson gson = new Gson();
             Type listType = new TypeToken<List<Customer>>() {}.getType();
             List<Customer> customers = gson.fromJson(reader, listType);
